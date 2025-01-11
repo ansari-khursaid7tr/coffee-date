@@ -109,6 +109,8 @@
             min-height: 60px;
             width: 100%;
             margin-top: 1.5rem;
+            padding: 1rem;
+            overflow: visible;
         }
 
         .next-btn {
@@ -159,6 +161,7 @@
             position: relative;
             transition: all 0.2s ease;
             z-index: 10;
+            min-width: 150px;
         }
 
         .hearts {
@@ -341,27 +344,30 @@
             
             // Normalize the direction and multiply by desired speed
             const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-            const moveX = (deltaX / distance) * 150;
-            const moveY = (deltaY / distance) * 150;
+            const speed = Math.max(200, 300 - distance); // Faster when closer
+            const moveX = (deltaX / distance) * speed;
+            const moveY = (deltaY / distance) * speed;
 
             // Calculate new position, ensuring button stays within container
             let newX = btnRect.left + moveX - rect.left;
             let newY = btnRect.top + moveY - rect.top;
             
-            // Keep button within bounds
-            newX = Math.min(Math.max(0, newX), rect.width - btnRect.width);
-            newY = Math.min(Math.max(0, newY), rect.height - btnRect.height);
+            // Keep button within bounds but allow some overflow
+            const margin = 50;
+            newX = Math.min(Math.max(-margin, newX), rect.width - btnRect.width + margin);
+            newY = Math.min(Math.max(-margin, newY), rect.height - btnRect.height + margin);
 
-            // Add some randomness to make it more playful
-            newX += (Math.random() - 0.5) * 50;
-            newY += (Math.random() - 0.5) * 50;
+            // Add more randomness when mouse is closer
+            const randomFactor = Math.max(30, 80 - distance/2);
+            newX += (Math.random() - 0.5) * randomFactor;
+            newY += (Math.random() - 0.5) * randomFactor;
 
             btn.style.position = 'absolute';
             btn.style.left = newX + 'px';
             btn.style.top = newY + 'px';
             
-            // Add a rotation for fun
-            const rotation = (Math.random() - 0.5) * 40;
+            // Add a rotation based on movement direction
+            const rotation = Math.atan2(deltaY, deltaX) * (180 / Math.PI) + (Math.random() - 0.5) * 40;
             btn.style.transform = `rotate(${rotation}deg)`;
         }
 
