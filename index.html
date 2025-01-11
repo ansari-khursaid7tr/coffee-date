@@ -305,8 +305,9 @@
                 <p>I can't wait to share this special moment with you! 💖</p>
             `;
 
-            // Hide buttons
+            // Hide buttons and cat image
             document.querySelector('.buttons').style.display = 'none';
+            document.querySelector('.cat-image-wrapper').style.display = 'none';
 
             // Start heart animation
             setInterval(createHeart, 300);
@@ -318,11 +319,7 @@
                 yoyo: true,
                 repeat: 1
             });
-
-            // Change cat image to happy version
-            const finalCat = document.getElementById('finalCat');
-            finalCat.src = "https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif";
-            finalCat.setAttribute('alt', 'Very happy excited cat');
+        }
         }
 
         function escapeNo(btn) {
