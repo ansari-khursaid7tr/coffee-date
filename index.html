@@ -17,21 +17,21 @@
             min-height: 100vh;
             background: linear-gradient(135deg, #fee9d7, #ffdde1);
             overflow-x: hidden;
-        }
-
-        .slide {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            margin: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            max-width: 800px;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.5s ease;
+            padding: 20px;
         }
 
         .slide.active {
@@ -40,51 +40,90 @@
         }
 
         .content {
-            max-width: 600px;
             background: white;
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin: 0 auto;
+        }
+
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
         }
 
         h1 {
             color: #ff6b6b;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .message {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
             color: #4a4a4a;
+            max-width: 480px;
         }
 
-        .cat-container {
+        .message p {
+            margin: 0.8rem 0;
+        }
+
+        .cat-image-wrapper {
             margin: 2rem 0;
+            padding: 1rem;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 20px;
+            box-shadow: 
+                0 10px 20px rgba(0, 0, 0, 0.1),
+                inset 0 -5px 15px rgba(255, 255, 255, 0.6);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cat-image-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.15),
+                inset 0 -5px 15px rgba(255, 255, 255, 0.6);
         }
 
         .cat-image {
-            max-width: 300px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 280px;
+            border-radius: 12px;
+            display: block;
         }
 
         .next-btn {
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             font-size: 1.2rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            background: #ff6b6b;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
             color: white;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
         }
 
         .next-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(45deg, #ff5c5c, #ff7f7f);
+        }
+
+        .next-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
         }
 
         .buttons {
@@ -164,52 +203,74 @@
     <!-- Slide 1 -->
     <div class="slide active" id="slide1">
         <div class="content">
-            <h1>Hey Beautiful! 💝</h1>
-            <div class="message">
-                <p>You know what's amazing?</p>
-                <p>Every time I see your smile, my whole day gets brighter...</p>
+            <div class="slide-content">
+                <h1>Hey Beautiful! 💝</h1>
+                <div class="message">
+                    <p>You know what's amazing?</p>
+                    <p>Every time I see your smile, my whole day gets brighter...</p>
+                </div>
+                <div class="cat-image-wrapper">
+                    <img src="/api/placeholder/300/300" alt="Cute cat looking shy" class="cat-image">
+                </div>
             </div>
-            <img src="/api/placeholder/300/300" alt="Cute cat looking shy" class="cat-image">
-            <button class="next-btn" onclick="nextSlide(1)">Continue... →</button>
+            <div class="button-container">
+                <button class="next-btn" onclick="nextSlide(1)">Continue... →</button>
+            </div>
         </div>
     </div>
 
     <!-- Slide 2 -->
     <div class="slide" id="slide2">
         <div class="content">
-            <h1>And you know what else? ✨</h1>
-            <div class="message">
-                <p>Each moment we spend together feels like a little adventure...</p>
-                <p>Even the simplest things become special when you're around!</p>
+            <div class="slide-content">
+                <h1>And you know what else? ✨</h1>
+                <div class="message">
+                    <p>Each moment we spend together feels like a little adventure...</p>
+                    <p>Even the simplest things become special when you're around!</p>
+                </div>
+                <div class="cat-image-wrapper">
+                    <img src="/api/placeholder/300/300" alt="Cute cat looking excited" class="cat-image">
+                </div>
             </div>
-            <img src="/api/placeholder/300/300" alt="Cute cat looking excited" class="cat-image">
-            <button class="next-btn" onclick="nextSlide(2)">Next... →</button>
+            <div class="button-container">
+                <button class="next-btn" onclick="nextSlide(2)">Next... →</button>
+            </div>
         </div>
     </div>
 
     <!-- Slide 3 -->
     <div class="slide" id="slide3">
         <div class="content">
-            <h1>Speaking of adventures... 🌟</h1>
-            <div class="message">
-                <p>I found this cozy little café that reminds me of you...</p>
-                <p>It's warm, sweet, and makes my heart smile - just like you do!</p>
+            <div class="slide-content">
+                <h1>Speaking of adventures... 🌟</h1>
+                <div class="message">
+                    <p>I found this cozy little café that reminds me of you...</p>
+                    <p>It's warm, sweet, and makes my heart smile - just like you do!</p>
+                </div>
+                <div class="cat-image-wrapper">
+                    <img src="/api/placeholder/300/300" alt="Cute cat with pleading eyes" class="cat-image">
+                </div>
             </div>
-            <img src="/api/placeholder/300/300" alt="Cute cat with pleading eyes" class="cat-image">
-            <button class="next-btn" onclick="nextSlide(3)">Almost there... →</button>
+            <div class="button-container">
+                <button class="next-btn" onclick="nextSlide(3)">Almost there... →</button>
+            </div>
         </div>
     </div>
 
     <!-- Final Slide -->
     <div class="slide" id="slide4">
         <div class="content">
-            <h1>So... ☕️</h1>
-            <div class="message">
-                <p>Would you make my day even more special</p>
-                <p>by going on a coffee date with me?</p>
+            <div class="slide-content">
+                <h1>So... ☕️</h1>
+                <div class="message">
+                    <p>Would you make my day even more special</p>
+                    <p>by going on a coffee date with me?</p>
+                </div>
+                <div class="cat-image-wrapper">
+                    <img src="/api/placeholder/300/300" alt="Cute cat looking hopeful" class="cat-image" id="finalCat">
+                </div>
             </div>
-            <img src="/api/placeholder/300/300" alt="Cute cat looking hopeful" class="cat-image" id="finalCat">
-            <div class="buttons">
+            <div class="button-container">
                 <button class="btn btn-yes" onclick="handleYes()">Yes, I'd love to! 😊</button>
                 <button class="btn btn-no" onmouseover="escapeNo(this)" onclick="handleNo()">No thanks</button>
             </div>
@@ -276,17 +337,72 @@
             const container = document.querySelector('#slide4 .content');
             const rect = container.getBoundingClientRect();
             const btnRect = btn.getBoundingClientRect();
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
 
-            const newX = Math.random() * (rect.width - btnRect.width);
-            const newY = Math.random() * (rect.height - btnRect.height);
+            // Calculate distance from mouse to button center
+            const btnCenterX = btnRect.left + btnRect.width / 2;
+            const btnCenterY = btnRect.top + btnRect.height / 2;
+            
+            // Calculate direction to move away from mouse
+            const deltaX = btnCenterX - mouseX;
+            const deltaY = btnCenterY - mouseY;
+            
+            // Normalize the direction and multiply by desired speed
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            const moveX = (deltaX / distance) * 150;
+            const moveY = (deltaY / distance) * 150;
+
+            // Calculate new position, ensuring button stays within container
+            let newX = btnRect.left + moveX - rect.left;
+            let newY = btnRect.top + moveY - rect.top;
+            
+            // Keep button within bounds
+            newX = Math.min(Math.max(0, newX), rect.width - btnRect.width);
+            newY = Math.min(Math.max(0, newY), rect.height - btnRect.height);
+
+            // Add some randomness to make it more playful
+            newX += (Math.random() - 0.5) * 50;
+            newY += (Math.random() - 0.5) * 50;
 
             btn.style.position = 'absolute';
             btn.style.left = newX + 'px';
             btn.style.top = newY + 'px';
+            
+            // Add a rotation for fun
+            const rotation = (Math.random() - 0.5) * 40;
+            btn.style.transform = `rotate(${rotation}deg)`;
         }
 
+        // Add mousemove listener to make button run away even before hover
+        document.addEventListener('mousemove', function(event) {
+            const btn = document.querySelector('.btn-no');
+            if (!btn) return;
+            
+            const btnRect = btn.getBoundingClientRect();
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+            
+            // Calculate distance from mouse to button
+            const btnCenterX = btnRect.left + btnRect.width / 2;
+            const btnCenterY = btnRect.top + btnRect.height / 2;
+            const distance = Math.sqrt(
+                Math.pow(mouseX - btnCenterX, 2) + 
+                Math.pow(mouseY - btnCenterY, 2)
+            );
+            
+            // If mouse is within 100px of button, make it run
+            if (distance < 100) {
+                escapeNo(btn);
+            }
+        });
+
         function handleNo() {
-            alert("Sorry, that's not an option! 😉");
+            const btn = document.querySelector('.btn-no');
+            if (btn) {
+                btn.style.transition = 'all 0.2s ease';
+                escapeNo(btn);
+            }
         }
     </script>
 </body>
