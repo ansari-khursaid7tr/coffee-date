@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Sweet Story</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fee9d7, #ffdde1);
+            overflow-x: hidden;
+        }
+
+        .slide {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .content {
+            max-width: 600px;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff6b6b;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #4a4a4a;
+        }
+
+        .cat-container {
+            margin: 2rem 0;
+        }
+
+        .cat-image {
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .next-btn {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            background: #ff6b6b;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            min-width: 150px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-yes {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-no {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts"></div>
+
+    <!-- Slide 1 -->
+    <div class="slide active" id="slide1">
+        <div class="content">
+            <h1>Hey Beautiful! 💝</h1>
+            <div class="message">
+                <p>You know what's amazing?</p>
+                <p>Every time I see your smile, my whole day gets brighter...</p>
+            </div>
+            <img src="/api/placeholder/300/300" alt="Cute cat looking shy" class="cat-image">
+            <button class="next-btn" onclick="nextSlide(1)">Continue... →</button>
+        </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide" id="slide2">
+        <div class="content">
+            <h1>And you know what else? ✨</h1>
+            <div class="message">
+                <p>Each moment we spend together feels like a little adventure...</p>
+                <p>Even the simplest things become special when you're around!</p>
+            </div>
+            <img src="/api/placeholder/300/300" alt="Cute cat looking excited" class="cat-image">
+            <button class="next-btn" onclick="nextSlide(2)">Next... →</button>
+        </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" id="slide3">
+        <div class="content">
+            <h1>Speaking of adventures... 🌟</h1>
+            <div class="message">
+                <p>I found this cozy little café that reminds me of you...</p>
+                <p>It's warm, sweet, and makes my heart smile - just like you do!</p>
+            </div>
+            <img src="/api/placeholder/300/300" alt="Cute cat with pleading eyes" class="cat-image">
+            <button class="next-btn" onclick="nextSlide(3)">Almost there... →</button>
+        </div>
+    </div>
+
+    <!-- Final Slide -->
+    <div class="slide" id="slide4">
+        <div class="content">
+            <h1>So... ☕️</h1>
+            <div class="message">
+                <p>Would you make my day even more special</p>
+                <p>by going on a coffee date with me?</p>
+            </div>
+            <img src="/api/placeholder/300/300" alt="Cute cat looking hopeful" class="cat-image" id="finalCat">
+            <div class="buttons">
+                <button class="btn btn-yes" onclick="handleYes()">Yes, I'd love to! 😊</button>
+                <button class="btn btn-no" onmouseover="escapeNo(this)" onclick="handleNo()">No thanks</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+
+        function nextSlide(slideNum) {
+            document.getElementById(`slide${slideNum}`).classList.remove('active');
+            document.getElementById(`slide${slideNum + 1}`).classList.add('active');
+            
+            // Add slide-in animation
+            gsap.from(`#slide${slideNum + 1} .content`, {
+                x: 100,
+                opacity: 0,
+                duration: 0.5
+            });
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.animation = 'float 4s linear';
+            document.querySelector('.hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+        function handleYes() {
+            // Change message
+            document.querySelector('#slide4 .message').innerHTML = `
+                <p>Yay! 🎉 You just made my day!</p>
+                <p>I can't wait to share this special moment with you! 💖</p>
+            `;
+
+            // Hide buttons
+            document.querySelector('.buttons').style.display = 'none';
+
+            // Start heart animation
+            setInterval(createHeart, 300);
+
+            // Bounce animation for the content
+            gsap.to('#slide4 .content', {
+                scale: 1.05,
+                duration: 0.3,
+                yoyo: true,
+                repeat: 1
+            });
+
+            // Change cat image
+            const finalCat = document.getElementById('finalCat');
+            finalCat.setAttribute('alt', 'Very happy excited cat');
+        }
+
+        function escapeNo(btn) {
+            const container = document.querySelector('#slide4 .content');
+            const rect = container.getBoundingClientRect();
+            const btnRect = btn.getBoundingClientRect();
+
+            const newX = Math.random() * (rect.width - btnRect.width);
+            const newY = Math.random() * (rect.height - btnRect.height);
+
+            btn.style.position = 'absolute';
+            btn.style.left = newX + 'px';
+            btn.style.top = newY + 'px';
+        }
+
+        function handleNo() {
+            alert("Sorry, that's not an option! 😉");
+        }
+    </script>
+</body>
+</html>
