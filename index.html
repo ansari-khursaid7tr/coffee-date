@@ -48,6 +48,7 @@
             margin: 0 auto;
             width: 90%;
             max-width: 650px;
+            position: relative;
         }
 
         .slide-content {
@@ -107,7 +108,7 @@
             align-items: center;
             flex-wrap: nowrap;
             position: relative;
-            min-height: 70px;
+            min-height: 60px;
             width: 100%;
             margin-top: 1.5rem;
         }
@@ -269,7 +270,7 @@
             </div>
             <div class="buttons">
                 <button class="btn btn-yes" onclick="handleYes()">Yes, I'd love to! 😊</button>
-                <button class="btn btn-no" onmouseover="escapeNo(this)" onclick="handleNo()">No thanks</button>
+                <button class="btn btn-no" onmouseover="escapeNo(this, event)" onclick="handleNo()">No thanks</button>
             </div>
         </div>
     </div>
@@ -327,7 +328,7 @@
             });
         }
 
-        function escapeNo(btn) {
+        function escapeNo(btn, event) {
             if (!btn.style.position || btn.style.position === 'relative') {
                 btn.style.position = 'absolute';
                 // Set initial position based on the button's current position
@@ -394,7 +395,6 @@
                     const mouseY = event.clientY;
                     
                     const btnCenterX = btnRect.left + btnRect.width / 2;
-                    const btnCenterX = btnRect.left + btnRect.width / 2;
                     const btnCenterY = btnRect.top + btnRect.height / 2;
                     const distance = Math.sqrt(
                         Math.pow(mouseX - btnCenterX, 2) + 
@@ -402,7 +402,7 @@
                     );
                     
                     if (distance < 150) {  // Increased detection range
-                        escapeNo(btn);
+                        escapeNo(btn, event);
                     }
                     isTrackingMouse = false;
                 });
@@ -413,7 +413,7 @@
             const btn = document.querySelector('.btn-no');
             if (btn) {
                 btn.style.transition = 'all 0.2s ease';
-                escapeNo(btn);
+                escapeNo(btn, event);
             }
         }
     </script>
