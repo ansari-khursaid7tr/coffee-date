@@ -312,6 +312,12 @@
                 <p>I can't wait to share this special moment with you! 💖</p>
             `;
 
+            // Hide buttons individually
+            const yesButton = document.querySelector('.btn-yes');
+            const noButton = document.querySelector('.btn-no');
+            if (yesButton) yesButton.style.display = 'none';
+            if (noButton) noButton.style.display = 'none';
+            
             // Hide buttons and cat image
             document.querySelector('.buttons').style.display = 'none';
             document.querySelector('.cat-image-wrapper').style.display = 'none';
